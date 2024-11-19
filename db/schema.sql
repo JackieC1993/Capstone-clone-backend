@@ -4,6 +4,7 @@ CREATE DATABASE goalhive_app;
 
 
 \c goalhive_app;
+
 CREATE TABLE user_profiles
 (
     userprofile_id SERIAL PRIMARY KEY,

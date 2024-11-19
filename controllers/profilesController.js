@@ -39,21 +39,14 @@ profiles.get("/", async (req, res) => {
   }
 });
 
-profiles.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const profile = await getProfile(id);
-    res.status(200).json(profile);
-  } catch (error) {
-    res.status(404).json({ error: error });
-  }
-});
+
 
 // Create a new profile(signup)
-profiles.post("/", async (req, res) => {
+profiles.post("/signup", async (req, res) => {
+  console.log(req.body)
   try {
     const newProfile = await createProfile(req.body);
-
+    
     // console.log("new profile: ", newProfile);
     const token = jwt.sign(
       { userId: newProfile.userprofile_id, username: newProfile.username },
@@ -127,6 +120,15 @@ profiles.delete("/:userprofile_id", async (req, res) => {
     res.status(200).json({ success: "Successfully deleted profile" });
   } catch (error) {
     res.status(404).json({ error: "error" });
+  }
+});
+profiles.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const profile = await getProfile(id);
+    res.status(200).json(profile);
+  } catch (error) {
+    res.status(404).json({ error: error });
   }
 });
 
